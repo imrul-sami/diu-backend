@@ -35,9 +35,6 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use(cors());
 app.use(express.json());
 
-// --- Serve Frontend Files ---
-app.use(express.static(path.join(__dirname, '../frontend')));
-
 // Models
 const User = require('./models/User.js');
 
@@ -182,10 +179,8 @@ io.on('connection', (socket) => {
 });
 
 // --- Serve Frontend ---
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
 
 // Start Server
 const PORT = process.env.PORT || 5000;
+
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
