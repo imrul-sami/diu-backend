@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    //  এখানে 'universityID' (বড় হাতের ID) ব্যবহার করা হয়েছে যা ফ্রন্টএন্ডের সাথে মিলবে
     universityID: {
         type: String,
         required: true,
@@ -17,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['user', 'driver'],
+        enum: ['user', 'driver', 'admin'], // admin রোল যোগ করা হয়েছে
         default: 'user'
     },
     password: {
@@ -30,4 +31,4 @@ const UserSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('UserV2', UserSchema);
