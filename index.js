@@ -98,10 +98,17 @@ app.post('/api/auth/login', async (req, res) => {
         if (!isMatch) { return res.status(400).json({ message: 'Invalid credentials' }); }
 
         const payload = { user: { id: user.id, name: user.name, role: user.role } };
-        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '5h' }, (err, token) => {
-            if (err) throw err;
-            res.json({ token, user: { name: user.name, role: user.role } });
-        });
+       //'365d' (১ বছর পর্যন্ত লগইন থাকবে)
+jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '365d' }, (err, token) => {
+    if (err) throw err;
+    res.json({
+        token,
+        user: {
+            name: user.name,
+            role: user.role
+        }
+    });
+});
     } catch (err) {
         res.status(500).json({ message: 'Server error: ' + err.message });
     }
@@ -159,3 +166,4 @@ app.get('*', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
