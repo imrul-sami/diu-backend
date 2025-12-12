@@ -128,7 +128,7 @@ app.post('/api/location/update', authMiddleware, async (req, res) => {
     res.json({ message: 'Location updated' });
 });
 
-// ✅ 5. Admin: Get All Users
+//  5. Admin: Get All Users
 app.get('/api/admin/users', authMiddleware, async (req, res) => {
     if(req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Admin access denied' });
@@ -141,7 +141,7 @@ app.get('/api/admin/users', authMiddleware, async (req, res) => {
     }
 });
 
-// ✅ 6. Admin: Delete User
+//  6. Admin: Delete User
 app.delete('/api/admin/delete/:id', authMiddleware, async (req, res) => {
     if(req.user.role !== 'admin') {
         return res.status(403).json({ message: 'Admin access denied' });
@@ -166,4 +166,5 @@ app.get('*', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
